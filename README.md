@@ -13,7 +13,7 @@ These test were verified on a Windows 7 system running Visual Studio 2015.
 
 ### Prerequisites
 
-The target system(s) need to have rpmbuild binary, ssh and scp programs to work
+Add Selenium WebDriver and Selenium Support packages to Visual Studio
 
 ## Running the tests
 
