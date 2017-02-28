@@ -74,7 +74,6 @@ namespace Selenium_UnitTest_Sample
             {
                 //When registration is good, class=piereg_message
                 IWebElement good_msg = driver.FindElement(By.ClassName("piereg_message"));
-                //Assert.  .Assert.Pass(good_msg.Text);
                 System.Console.WriteLine(good_msg.Text);
 
             }
