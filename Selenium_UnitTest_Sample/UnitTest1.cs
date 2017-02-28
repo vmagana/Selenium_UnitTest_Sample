@@ -15,7 +15,7 @@ namespace Selenium_UnitTest_Sample
     public class UnitTest1
     {
         private IWebDriver driver;
-        private string baseURL,storeURL;
+        private string baseURL,storeURL,formURL;
         private bool acceptNextAlert = true;
 
         [TestInitialize]
@@ -25,6 +25,7 @@ namespace Selenium_UnitTest_Sample
             //IWebDriver driver = new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), firefoxOptions, TimeSpan.FromSeconds(30));
             baseURL = "http://demoqa.com/";
             storeURL = "http://store.demoqa.com/";
+            formURL = "http://toolsqa.com/automation-practice-form/";
         } 
 
 
@@ -167,6 +168,35 @@ namespace Selenium_UnitTest_Sample
 
         }
 
+        [TestMethod]
+        public void FillForm()
+        {
+            driver.Navigate().GoToUrl(formURL);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Name("firstname"))).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys("Victor");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Name("lastname"))).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys("Magana");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("sex-0"))).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("exp-4"))).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("datepicker"))).Clear();
+            driver.FindElement(By.Id("datepicker")).SendKeys("01/01/17");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("profession-1"))).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("tool-1"))).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("tool-2"))).Click();
+            new SelectElement(driver.FindElement(By.Id("continents"))).SelectByText("North America");
+            //new SelectElement(driver.FindElement(By.Id("selenium_commands"))).SelectByText("Browser Commands");
+            SelectElement olistSelect =new SelectElement(driver.FindElement(By.Id("selenium_commands")));
+            IList<IWebElement> elemList = olistSelect.Options;
+            foreach (IWebElement item in elemList)
+            {
+                item.Click();
+                System.Console.WriteLine(item.Text + " selected: " + item.Selected);
+
+            }
+
+
+        }
 
         [TestCleanup]
         public void TestCleanup()
